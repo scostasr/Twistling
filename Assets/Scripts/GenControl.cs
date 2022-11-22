@@ -23,7 +23,7 @@ public class GenControl : MonoBehaviour
     {
         //Restart game when press R
         if (Input.GetKeyDown(KeyCode.R))
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene(1);
 
 
         //Game win and gameover conditions      

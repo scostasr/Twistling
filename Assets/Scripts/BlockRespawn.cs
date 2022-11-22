@@ -11,9 +11,8 @@ public class BlockRespawn : MonoBehaviour
     public List<GameObject> blockPrefabs = new List<GameObject>();
     private GameObject blockTypeSelected;
     private GameObject blockInstantiated;
-    public List<GameObject> spawningPoints = new List<GameObject>();
-    private Vector3 upLeft, upRight, downLeft, downRight;
-    private Vector2 randomPos;
+    public List<Vector3> spawningPoints = new List<Vector3>();
+    public Vector2 randomPos;
     public float scanRadius;
     public LayerMask layerBlocks;
     private Collider2D checkCollider;
@@ -28,9 +27,10 @@ public class BlockRespawn : MonoBehaviour
         //Set initial countdown
         respawnTime = respawnTimeInitial;
 
-        upLeft = spawningPoints[0].transform.position;
-        downLeft = spawningPoints[2].transform.position;
-        downRight = spawningPoints[3].transform.position;
+        foreach (Transform child in transform)
+        {
+            spawningPoints.Add(child.position);
+        }
 
     }
 
@@ -83,7 +83,8 @@ public class BlockRespawn : MonoBehaviour
 
 
             //Select random location within the spawning area
-            randomPos = new Vector2(Random.Range(downRight.x, downLeft.x), Random.Range(downLeft.y, upLeft.y));
+            int randomNumber = Random.Range(0, spawningPoints.Count);
+            randomPos = spawningPoints[randomNumber];
 
             //Check if in that position, there is already a block (collider)
             checkCollider = Physics2D.OverlapCircle(randomPos, scanRadius, layerBlocks);
@@ -99,10 +100,10 @@ public class BlockRespawn : MonoBehaviour
                 //Instantiate the object with the selected type in the selected location
                 blockInstantiated = Instantiate(blockTypeSelected, randomPos, Quaternion.identity);
             }
-                
+
             //Reset Respawn time to initial value, to start the countdown again
             respawnTime = respawnTimeInitial;
-            }
+        }
 
         if (canSpawn == false)
         {
@@ -110,9 +111,9 @@ public class BlockRespawn : MonoBehaviour
         }
     }
 
-    
 
-   
+
+
 
 
 

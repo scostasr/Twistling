@@ -18,24 +18,21 @@ public class BehaviourPress : MonoBehaviour
     private GameObject balanceBall;
     public float positiveBoostToBallPosition;
     public float negativeBoostToBallPosition;
-    public float timeDelay;
+    public float timeDelay, timeBlink;
     private int safetyNet;
-    public Vector3 startingPos, targetPos, currentPos;
     private Vector3 randomPos;
-    public float amountShake, speedBackFromShake;
-    public bool onShake = false;
     public bool onKeyPressed = false;
+    public bool canTakeDamage = false;
 
 
     void Start()
     {
         gameController = GameObject.Find("GameController");
         balanceBall = GameObject.Find("BalanceBall");
-        startingPos = transform.position;
-        targetPos = new Vector2(startingPos.x, startingPos.y + amountShake);
 
-        //Add one more to variable blocksOnScreen from GenControl component
+        //Add ++ to variable blocksOnScreen from GenControl component
         gameController.GetComponent<GenControl>().blocksOnScreen++;
+        
 
         #region Input selection
         //List of all inputs
@@ -66,8 +63,6 @@ public class BehaviourPress : MonoBehaviour
         inputList.Add(KeyCode.Z);
         inputList.Add(KeyCode.Space);
         inputList.Add(KeyCode.Return);
-        inputList.Add(KeyCode.RightShift);
-        inputList.Add(KeyCode.LeftShift);
         inputList.Add(KeyCode.UpArrow);
         inputList.Add(KeyCode.DownArrow);
         inputList.Add(KeyCode.RightArrow);
@@ -101,73 +96,60 @@ public class BehaviourPress : MonoBehaviour
             {
                 Debug.Log("No key found");
                 break;
-            } 
-            
+            }
+
         }
 
         //Add the input selected to the list of used keys in GameController
         gameController.GetComponent<GenControl>().keysUsed.Add(inputSelected);
 
         //Display key code as text
-        string inputName = "Press " + inputSelected.ToString();
-        transform.Find("InputText").GetComponent<TextMeshPro>().text = inputName;
+        string inputName = inputSelected.ToString();
+        string inputName_corrected = inputName.Replace("Alpha", "");
+        transform.Find("InputText").GetComponent<TextMeshPro>().text = inputName_corrected;
         #endregion
 
         StartCoroutine(CountdownForDamage());
-        
+
     }
 
 
     void Update()
     {
- 
-        if (onShake == true)
-        {  
-            if (currentPos.y > startingPos.y)
-            {
-                transform.position = Vector3.MoveTowards(transform.position, startingPos, speedBackFromShake);
-            }
-            else onShake = false;
 
-        }
-
-        //Detect damage when key pressed and shake object, and stop decreasing balanceball movement
+        //Detect damage when key pressed, and stop decreasing balanceball movement
         if (Input.GetKeyDown(inputSelected))
         {
             onKeyPressed = true;
             life -= lifeDamageHit;
 
-            onShake = true;
-            transform.position = targetPos;
+            //Change sprite color when button is pressed
+            gameObject.GetComponent<SpriteRenderer>().color = Color.green;
+
         }
 
-        else 
+        else
         {
-            onKeyPressed = false;
+            GetComponent<SpriteRenderer>().color = Color.red;
+            onKeyPressed = false;  
         }
 
-        //Decrease score if unpressed after 2 secs after creating object
-        if (onKeyPressed == false && balanceBall != null)
+        //Decrease score if left unpressed for longer than 2 secs after creating the object
+        if (canTakeDamage == true && balanceBall != null)
         {
             balanceBall.transform.position = new Vector2(balanceBall.transform.position.x - negativeBoostToBallPosition, balanceBall.transform.position.y);
         }
 
 
-        //Show object life to player
-        if (life >= 0)
-        {
-            transform.Find("LifeText").GetComponent<TextMeshPro>().text = Convert.ToString(life);
-        }
-
-        //Destroy object if life <0
+        //Destroy object if life < 0
         if (life <= 0)
         {
 
             //Give an extra positive boost to the balance ball position, to increase game feel and give more room to the player
             if (balanceBall != null)
-            balanceBall.transform.position = new Vector2(balanceBall.transform.position.x + positiveBoostToBallPosition, balanceBall.transform.position.y);
+                balanceBall.transform.position = new Vector2(balanceBall.transform.position.x + positiveBoostToBallPosition, balanceBall.transform.position.y);
 
-            //Add 1 to blocksDestroyed variable, minus 1 to blocksOnScreen variable
+            //++ to blocksDestroyed variable, -- to blocksOnScreen variable
             gameController.GetComponent<GenControl>().blocksDestroyed++;
             gameController.GetComponent<GenControl>().blocksOnScreen--;
 
@@ -181,7 +163,9 @@ public class BehaviourPress : MonoBehaviour
     IEnumerator CountdownForDamage()
     {
         yield return new WaitForSeconds(timeDelay);
-        onKeyPressed = false;
+        canTakeDamage = true;
     }
+
+
 
 }

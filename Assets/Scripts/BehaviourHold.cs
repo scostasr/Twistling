@@ -16,7 +16,6 @@ public class BehaviourHold : MonoBehaviour
     public float positiveBoostToBallPosition;
     public float negativeBoostToBallPosition;
     public bool onWait = true;
-    public bool onShake = false;
     public float amountShake;
 
     void Start()
@@ -25,8 +24,10 @@ public class BehaviourHold : MonoBehaviour
         balanceBall = GameObject.Find("BalanceBall");
         startingPos = transform.position;
 
+        //Countdown to decrease score if button left unpressed
         StartCoroutine(Countdown());
 
+        
         #region Input selection
         //List of all inputs
         inputList.Add(KeyCode.A);
@@ -102,7 +103,7 @@ public class BehaviourHold : MonoBehaviour
         //Display key code as text
         string inputName = inputSelected.ToString();
         string inputName_corrected = inputName.Replace("Alpha", "");
-        GetComponentInChildren<TextMeshPro>().text = inputName_corrected;
+        transform.Find("InputText").GetComponent<TextMeshPro>().text = inputName_corrected;
 
         //Add one more to variable blocksOnScreen from GenControl component
         gameController.GetComponent<GenControl>().blocksOnScreen++;
@@ -114,17 +115,12 @@ public class BehaviourHold : MonoBehaviour
 
     void Update()
     {
-        if (onShake == true)
-        {
-            transform.position = startingPos;
-            transform.position = new Vector2(startingPos.x + (Random.Range(-1, 1) * amountShake), startingPos.y + (Random.Range(-1, 1) * amountShake));
-        }
 
         if (Input.GetKey(inputSelected))
         {
             //Change colour to green when the key is pressed
             GetComponent<SpriteRenderer>().color = Color.green;
-            //onShake = true;
+
             onWait = true;
 
             //Give an extra positive boost to the balance ball position, to increase game feel and give more room to the player
@@ -132,7 +128,7 @@ public class BehaviourHold : MonoBehaviour
                 balanceBall.transform.position = new Vector2(balanceBall.transform.position.x + positiveBoostToBallPosition, balanceBall.transform.position.y);
         }
 
-        //Decrease score if unpressed after 2 secs after creating object
+        //Decrease score if left unpressed 2 secs after creating object
         if (onWait == false && balanceBall != null)
         {
             balanceBall.transform.position = new Vector2(balanceBall.transform.position.x - negativeBoostToBallPosition, balanceBall.transform.position.y);
@@ -143,7 +139,6 @@ public class BehaviourHold : MonoBehaviour
         if (Input.GetKeyUp(inputSelected))
         {
             GetComponent<SpriteRenderer>().color = Color.red;
-            onShake = false;
             onWait=false;
         }
 
