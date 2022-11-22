@@ -107,6 +107,7 @@ public class BehaviourPress : MonoBehaviour
         string inputName = inputSelected.ToString();
         string inputName_corrected = inputName.Replace("Alpha", "");
         transform.Find("InputText").GetComponent<TextMeshPro>().text = inputName_corrected;
+
         #endregion
 
         StartCoroutine(CountdownForDamage());

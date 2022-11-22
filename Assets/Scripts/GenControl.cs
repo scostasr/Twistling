@@ -11,12 +11,10 @@ public class GenControl : MonoBehaviour
     public int blocksDestroyed;
     public int blocksOnScreen;
     public int blocksHoldOnScreen;
+    public bool isGameOver = false;
+    public bool isWin = false;
     public List<KeyCode> keysUsed = new List<KeyCode>();
 
-    void Start()
-    {
-        
-    }
 
 
     void Update()
@@ -27,6 +25,14 @@ public class GenControl : MonoBehaviour
 
 
         //Game win and gameover conditions      
+        if (isGameOver == true)
+        {
+            SceneManager.LoadScene(2);
+        }
 
+        if (isWin == true)
+        {
+            SceneManager.LoadScene(3);
+        }
     }
 }

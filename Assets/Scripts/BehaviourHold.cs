@@ -105,9 +105,6 @@ public class BehaviourHold : MonoBehaviour
         string inputName_corrected = inputName.Replace("Alpha", "");
         transform.Find("InputText").GetComponent<TextMeshPro>().text = inputName_corrected;
 
-        //Add one more to variable blocksOnScreen from GenControl component
-        gameController.GetComponent<GenControl>().blocksOnScreen++;
-
         #endregion
 
     }

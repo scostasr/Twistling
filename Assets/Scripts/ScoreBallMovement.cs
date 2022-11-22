@@ -7,29 +7,26 @@ public class ScoreBallMovement : MonoBehaviour
 
     public GameObject gameController;
 
-    void Start()
-    {
-        
-    }
 
-
-    void Update()
-    {
-
-    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.name == "TopLeft")
+        if (collision.gameObject.name == "GameOverTrigger")
         {
             Debug.Log("Game Over");
-            //Destroy(gameObject);
+            gameController.GetComponent<GenControl>().isGameOver = true;
+
+            Destroy(gameObject);
+            
         }
 
-        else if (collision.gameObject.name == "TopRight")
+        else if (collision.gameObject.name == "WinTrigger")
         {
             Debug.Log("You win");
+            gameController.GetComponent<GenControl>().isWin = true;
+
             Destroy(gameObject);
+            
         }
     }
 
