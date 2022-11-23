@@ -128,7 +128,7 @@ public class BehaviourPress : MonoBehaviour
 
         }
 
-        else
+        if (Input.GetKeyUp(inputSelected))
         {
             GetComponent<SpriteRenderer>().color = Color.red;
             onKeyPressed = false;  
