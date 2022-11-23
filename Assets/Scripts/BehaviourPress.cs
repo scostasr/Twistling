@@ -13,10 +13,12 @@ public class BehaviourPress : MonoBehaviour
     public float    lifeDamageHit;
     public float    positiveBoostToBallPosition;
     public float    negativeBoostToBallPosition;
+    public float    positiveBoostDuration;
     public float    timeDelay;
+    private float   duration;
 
     public bool     onKeyPressed  = false;
-    public bool     canTakeDamage = false;
+    public bool     canTakeDamage = false; 
 
     private KeyCode inputSelected;
     private int     safetyNet;
@@ -85,7 +87,7 @@ public class BehaviourPress : MonoBehaviour
         //Decrease score if left unpressed for longer than 2 secs after creating the object
         if (canTakeDamage == true && balanceBall != null)
         {
-            balanceBall.transform.position = new Vector2(balanceBall.transform.position.x - negativeBoostToBallPosition * 0.001f, balanceBall.transform.position.y);
+            balanceBall.transform.position = new Vector2(balanceBall.transform.position.x - negativeBoostToBallPosition * Time.deltaTime, balanceBall.transform.position.y);
         }
 
 
@@ -95,7 +97,14 @@ public class BehaviourPress : MonoBehaviour
 
             //Give an extra positive boost to the balance ball position, to increase game feel and give more room to the player
             if (balanceBall != null)
-                balanceBall.transform.position = new Vector2(balanceBall.transform.position.x + positiveBoostToBallPosition, balanceBall.transform.position.y);
+            {
+                duration = positiveBoostDuration;
+                while (duration > 0)
+                {
+                    balanceBall.transform.Translate(new Vector3(balanceBall.transform.position.x + positiveBoostToBallPosition * Time.deltaTime, balanceBall.transform.position.y));
+                }
+
+            }
 
             //++ to blocksDestroyed variable, -- to blocksOnScreen variable
             genControl.blocksDestroyed++;

@@ -10,8 +10,10 @@ public class GenControl : MonoBehaviour
     public int blocksHoldOnScreen;
     public bool isGameOver = false;
     public bool isWin = false;
-    public List<KeyCode>  keysUsed  = new List<KeyCode>();
+    public List<KeyCode> keysUsed = new List<KeyCode>();
     public readonly List<KeyCode> inputList = new List<KeyCode>();
+    public bool gameIsPaused = false;
+    public GameObject pauseMenu;
 
     private void Awake()
     {
@@ -35,7 +37,43 @@ public class GenControl : MonoBehaviour
         {
             SceneManager.LoadScene(3);
         }
+
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (gameIsPaused == false)
+            {
+                PauseGame();
+            }
+
+            else
+            {
+                ResumeGame();
+            }
+        }
+
     }
+
+    public void ResumeGame()
+    {
+        gameIsPaused = false;
+        pauseMenu.SetActive(false);
+        Time.timeScale = 1;
+    }
+
+    public void PauseGame()
+    {
+        gameIsPaused = true;
+        pauseMenu.SetActive(true);
+        Time.timeScale = 0;
+    }
+
+    public void QuiteGame()
+    {
+        Debug.Log("Game is exiting");
+        Application.Quit();
+    }
+
 
     private void BuildInputList()
     {

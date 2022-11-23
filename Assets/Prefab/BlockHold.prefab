@@ -445,10 +445,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a68a296c3d7fa8048ab57451e74b46e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  life: 0
+  lifeDamageHit: 0
   positiveBoostToBallPosition: 0.001
-  negativeBoostToBallPosition: 2
-  onWait: 1
+  negativeBoostToBallPosition: 1
   timeDelay: 0.5
+  onKeyPressed: 0
+  canTakeDamage: 0
+  onWait: 1
 --- !u!61 &2397809424549011104
 BoxCollider2D:
   m_ObjectHideFlags: 0
