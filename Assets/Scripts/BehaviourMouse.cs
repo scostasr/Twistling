@@ -28,7 +28,7 @@ public class BehaviourMouse : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKey(KeyCode.Mouse0))
+        if (Input.GetKey(KeyCode.Mouse0) && balanceBall != null)
         {
             //Change colour to green when the key is pressed
             GetComponent<SpriteRenderer>().sprite = mouseGreen;

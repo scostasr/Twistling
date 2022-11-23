@@ -17,12 +17,14 @@ public class BehaviourHold : MonoBehaviour
     public float negativeBoostToBallPosition;
     public bool onWait = true;
     public float timeDelay;
+    private List<KeyCode> keysUsed;
 
     void Start()
     {
         gameController = GameObject.Find("GameController");
         balanceBall = GameObject.Find("BalanceBall");
         startingPos = transform.position;
+        keysUsed = gameController.GetComponent<GenControl>().keysUsed;
 
         //Countdown to decrease score if button left unpressed
         StartCoroutine(Countdown());
@@ -81,7 +83,7 @@ public class BehaviourHold : MonoBehaviour
         int randomNum = Random.Range(0, inputList.Count);
         inputSelected = inputList[randomNum];
 
-        while (gameController.GetComponent<GenControl>().keysUsed.Contains(inputSelected) == true)
+        while (keysUsed.Contains(inputSelected) == true)
         {
             Debug.Log("Key already used");
             randomNum = Random.Range(0, inputList.Count);

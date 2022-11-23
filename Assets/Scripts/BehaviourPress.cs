@@ -23,6 +23,7 @@ public class BehaviourPress : MonoBehaviour
     private Vector3 randomPos;
     public bool onKeyPressed = false;
     public bool canTakeDamage = false;
+    private List<KeyCode> keysUsed;
 
 
     void Start()
@@ -30,9 +31,8 @@ public class BehaviourPress : MonoBehaviour
         gameController = GameObject.Find("GameController");
         balanceBall = GameObject.Find("BalanceBall");
 
-        //Add ++ to variable blocksOnScreen from GenControl component
-        gameController.GetComponent<GenControl>().blocksOnScreen++;
-        
+        keysUsed = gameController.GetComponent<GenControl>().keysUsed;
+
 
         #region Input selection
         //List of all inputs
@@ -84,7 +84,7 @@ public class BehaviourPress : MonoBehaviour
         int randomNum = Random.Range(0, inputList.Count);
         inputSelected = inputList[randomNum];
 
-        while (gameController.GetComponent<GenControl>().keysUsed.Contains(inputSelected) == true)
+        while (keysUsed.Contains(inputSelected) == true)
         {
             Debug.Log("Key already used");
             randomNum = Random.Range(0, inputList.Count);
