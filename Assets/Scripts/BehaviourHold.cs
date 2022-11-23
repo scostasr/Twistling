@@ -16,7 +16,7 @@ public class BehaviourHold : MonoBehaviour
     public float positiveBoostToBallPosition;
     public float negativeBoostToBallPosition;
     public bool onWait = true;
-    public float amountShake;
+    public float timeDelay;
 
     void Start()
     {
@@ -72,7 +72,6 @@ public class BehaviourHold : MonoBehaviour
         inputList.Add(KeyCode.Alpha8);
         inputList.Add(KeyCode.Alpha9);
         inputList.Add(KeyCode.Alpha0);
-        inputList.Add(KeyCode.CapsLock);
 
 
 
@@ -128,7 +127,7 @@ public class BehaviourHold : MonoBehaviour
         //Decrease score if left unpressed 2 secs after creating object
         if (onWait == false && balanceBall != null)
         {
-            balanceBall.transform.position = new Vector2(balanceBall.transform.position.x - negativeBoostToBallPosition, balanceBall.transform.position.y);
+            balanceBall.transform.position = new Vector2(balanceBall.transform.position.x - negativeBoostToBallPosition * 0.001f, balanceBall.transform.position.y);
 
         }
 
@@ -142,7 +141,7 @@ public class BehaviourHold : MonoBehaviour
     }
     IEnumerator Countdown()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(timeDelay);
         onWait = false;
     }
 

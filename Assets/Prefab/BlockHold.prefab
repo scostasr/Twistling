@@ -76,8 +76,8 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1860391921
+  m_SortingLayer: 1
   m_SortingOrder: 2
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &3468587923735728355
@@ -249,8 +249,8 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1860391921
+  m_SortingLayer: 1
   m_SortingOrder: 2
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &534441421191152423
@@ -379,7 +379,7 @@ Transform:
   - {fileID: 5746042906840631843}
   - {fileID: 2431555692885427322}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6981738640078757984
 SpriteRenderer:
@@ -419,9 +419,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingLayerID: 1860391921
+  m_SortingLayer: 1
+  m_SortingOrder: 1
   m_Sprite: {fileID: 1943588757, guid: f373db367d7dca94890849811073eb35, type: 3}
   m_Color: {r: 0.9622642, g: 0.112797365, b: 0.09531862, a: 1}
   m_FlipX: 0
@@ -445,10 +445,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a68a296c3d7fa8048ab57451e74b46e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  positiveBoostToBallPosition: 0.005
-  negativeBoostToBallPosition: 0.02
+  positiveBoostToBallPosition: 0.001
+  negativeBoostToBallPosition: 2
   onWait: 1
-  amountShake: 0.05
+  timeDelay: 0.5
 --- !u!61 &2397809424549011104
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -550,9 +550,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 1860391921
+  m_SortingLayer: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.43921572, g: 0.49803925, b: 0.62352943, a: 1}
   m_FlipX: 0

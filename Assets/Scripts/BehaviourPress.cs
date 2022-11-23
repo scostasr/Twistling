@@ -18,7 +18,7 @@ public class BehaviourPress : MonoBehaviour
     private GameObject balanceBall;
     public float positiveBoostToBallPosition;
     public float negativeBoostToBallPosition;
-    public float timeDelay, timeBlink;
+    public float timeDelay;
     private int safetyNet;
     private Vector3 randomPos;
     public bool onKeyPressed = false;
@@ -78,7 +78,6 @@ public class BehaviourPress : MonoBehaviour
         inputList.Add(KeyCode.Alpha8);
         inputList.Add(KeyCode.Alpha9);
         inputList.Add(KeyCode.Alpha0);
-        inputList.Add(KeyCode.CapsLock);
 
 
         //Select one input randomly, that it is not already in the list of used keys
@@ -138,7 +137,7 @@ public class BehaviourPress : MonoBehaviour
         //Decrease score if left unpressed for longer than 2 secs after creating the object
         if (canTakeDamage == true && balanceBall != null)
         {
-            balanceBall.transform.position = new Vector2(balanceBall.transform.position.x - negativeBoostToBallPosition, balanceBall.transform.position.y);
+            balanceBall.transform.position = new Vector2(balanceBall.transform.position.x - negativeBoostToBallPosition * 0.001f, balanceBall.transform.position.y);
         }
 
 

@@ -14,6 +14,7 @@ public class BehaviourMouse : MonoBehaviour
     public Sprite mouseWhite, mouseGreen, mouseRed;
     public float positiveBoostToBallPosition;
     public float negativeBoostToBallPosition;
+    public float timeDelay;
 
     void Start()
     {
@@ -39,15 +40,18 @@ public class BehaviourMouse : MonoBehaviour
         //Decrease score if unpressed after X secs after creating object
         else if (onWait == false && balanceBall != null)
         {
+            balanceBall.transform.position = new Vector2(balanceBall.transform.position.x - negativeBoostToBallPosition * 0.001f, balanceBall.transform.position.y);
+
             //Change colour back to red when the key is unpressed
             GetComponent<SpriteRenderer>().sprite = mouseRed;
+
         }
 
             
     }
     IEnumerator Countdown()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(timeDelay);
         onWait = false;
     }
 

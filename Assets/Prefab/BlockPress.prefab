@@ -77,8 +77,8 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1860391921
+  m_SortingLayer: 1
   m_SortingOrder: 2
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &2504433721996133236
@@ -249,8 +249,8 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1860391921
+  m_SortingLayer: 1
   m_SortingOrder: 2
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &2670127454935676610
@@ -379,7 +379,7 @@ Transform:
   - {fileID: 4247782896327259856}
   - {fileID: 7432212970610632783}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &9152432216171083786
 SpriteRenderer:
@@ -419,9 +419,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingLayerID: 1860391921
+  m_SortingLayer: 1
+  m_SortingOrder: 1
   m_Sprite: {fileID: 677963007, guid: f373db367d7dca94890849811073eb35, type: 3}
   m_Color: {r: 0.9607844, g: 0.1137255, b: 0.09411766, a: 1}
   m_FlipX: 0
@@ -473,10 +473,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   life: 70
   lifeDamageHit: 10
-  positiveBoostToBallPosition: 0.5
-  negativeBoostToBallPosition: 0.01
-  timeDelay: 1
-  timeBlink: 0.1
+  positiveBoostToBallPosition: 0.7
+  negativeBoostToBallPosition: 2
+  timeDelay: 0.5
   onKeyPressed: 0
   canTakeDamage: 0
 --- !u!1 &7177922304056628638
@@ -554,9 +553,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 1860391921
+  m_SortingLayer: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.43921572, g: 0.49803925, b: 0.62352943, a: 1}
   m_FlipX: 0

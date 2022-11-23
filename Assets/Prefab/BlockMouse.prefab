@@ -32,7 +32,7 @@ Transform:
   m_Children:
   - {fileID: 6438824665928975410}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1489385625802551704
 SpriteRenderer:
@@ -72,9 +72,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingLayerID: 1860391921
+  m_SortingLayer: 1
+  m_SortingOrder: 1
   m_Sprite: {fileID: -3397387025712965628, guid: db31bff378f28f848ae438927c489acb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -103,7 +103,8 @@ MonoBehaviour:
   mouseGreen: {fileID: -3124372832261642726, guid: db31bff378f28f848ae438927c489acb, type: 3}
   mouseRed: {fileID: -3397387025712965628, guid: db31bff378f28f848ae438927c489acb, type: 3}
   positiveBoostToBallPosition: 0.005
-  negativeBoostToBallPosition: 0.03
+  negativeBoostToBallPosition: 5
+  timeDelay: 0
 --- !u!1 &5063211216038520506
 GameObject:
   m_ObjectHideFlags: 0
@@ -180,9 +181,9 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingLayerID: 1860391921
+  m_SortingLayer: 1
+  m_SortingOrder: 2
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &3327457269253261538
 MonoBehaviour:
