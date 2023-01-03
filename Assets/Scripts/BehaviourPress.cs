@@ -11,14 +11,17 @@ public class BehaviourPress : MonoBehaviour
 
     public float    life;
     public float    lifeDamageHit;
-    public float    positiveBoostToBallPosition;
+    public float    positiveBoostToBall;
     public float    negativeBoostToBallPosition;
     public float    positiveBoostDuration;
     public float    timeDelay;
-    private float   duration;
+    public float   duration;
+    public float    speedPositiveBoost;
 
     public bool     onKeyPressed  = false;
-    public bool     canTakeDamage = false; 
+    public bool     canTakeDamage = false;
+
+    public Vector2  targetPosition;
 
     private KeyCode inputSelected;
     private int     safetyNet;
@@ -99,9 +102,20 @@ public class BehaviourPress : MonoBehaviour
             if (balanceBall != null)
             {
                 duration = positiveBoostDuration;
+                targetPosition = new Vector2(balanceBall.transform.position.x + positiveBoostToBall, balanceBall.transform.position.y);
+                safetyNet = 0;
+
                 while (duration > 0)
                 {
-                    balanceBall.transform.Translate(new Vector3(balanceBall.transform.position.x + positiveBoostToBallPosition * Time.deltaTime, balanceBall.transform.position.y));
+                    balanceBall.transform.position = Vector2.MoveTowards(balanceBall.transform.position, targetPosition, speedPositiveBoost * Time.deltaTime);
+                    duration -= Time.deltaTime;
+
+                    safetyNet++;
+                    if (safetyNet >= 200)
+                    {
+                        Debug.Log("error scoreBall");
+                        break;
+                    }
                 }
 
             }

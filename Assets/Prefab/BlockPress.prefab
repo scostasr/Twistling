@@ -473,12 +473,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   life: 70
   lifeDamageHit: 10
-  positiveBoostToBallPosition: 0.7
+  positiveBoostToBall: 1
   negativeBoostToBallPosition: 1
   positiveBoostDuration: 1
   timeDelay: 0.5
+  duration: 0
+  speedPositiveBoost: 10
   onKeyPressed: 0
   canTakeDamage: 0
+  targetPosition: {x: 0, y: 0}
 --- !u!1 &7177922304056628638
 GameObject:
   m_ObjectHideFlags: 0
