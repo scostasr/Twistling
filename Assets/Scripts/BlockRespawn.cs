@@ -26,6 +26,7 @@ public class BlockRespawn : MonoBehaviour
         //Set initial countdown
         respawnTime = respawnTimeInitial;
 
+        //Create list of Spawning Points
         foreach (Transform child in transform)
         {
             spawningPoints.Add(child.position);
