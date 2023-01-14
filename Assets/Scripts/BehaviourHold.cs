@@ -10,6 +10,7 @@ public class BehaviourHold : MonoBehaviour
     private GameObject gameController;
     private GameObject balanceBall;
     private GenControl genControl;
+    private Color color_original;
 
     public float life;
     public float lifeDamageHit;
@@ -34,6 +35,9 @@ public class BehaviourHold : MonoBehaviour
 
     void Start()
     {
+        //Store original color
+        color_original = spriteRenderer.color;
+
         //Select one input randomly, that it is not already in the list of used keys
         int randomNum = Random.Range(0, genControl.inputList.Count);
         inputSelected = genControl.inputList[randomNum];
@@ -90,7 +94,7 @@ public class BehaviourHold : MonoBehaviour
         //Change colour back to red when the key is unpressed
         if (Input.GetKeyUp(inputSelected))
         {
-            GetComponent<SpriteRenderer>().color = Color.red;
+            spriteRenderer.color = color_original;
             onWait = false;
         }
 

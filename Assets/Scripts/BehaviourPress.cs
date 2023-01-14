@@ -8,6 +8,7 @@ public class BehaviourPress : MonoBehaviour
     private GameObject     gameController;
     private GameObject     balanceBall;
     private GenControl     genControl;
+    private Color          color_original;
 
     public float    life;
     public float    lifeDamageHit;
@@ -15,7 +16,7 @@ public class BehaviourPress : MonoBehaviour
     public float    negativeBoostToBallPosition;
     public float    positiveBoostDuration;
     public float    timeDelay;
-    public float   duration;
+    public float    duration;
     public float    speedPositiveBoost;
 
     public bool     onKeyPressed  = false;
@@ -36,6 +37,9 @@ public class BehaviourPress : MonoBehaviour
 
     void Start()
     {
+        //Store original color
+        color_original = spriteRenderer.color;
+
         //Select one input randomly, that it is not already in the list of used keys
         int randomNum = Random.Range(0, genControl.inputList.Count);
         inputSelected = genControl.inputList[randomNum];
@@ -83,7 +87,7 @@ public class BehaviourPress : MonoBehaviour
 
         if (Input.GetKeyUp(inputSelected))
         {
-            spriteRenderer.color = Color.red;
+            spriteRenderer.color = color_original;
             onKeyPressed = false;  
         }
 
