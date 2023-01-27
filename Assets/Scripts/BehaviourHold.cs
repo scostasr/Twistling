@@ -10,10 +10,10 @@ public class BehaviourHold : MonoBehaviour
     private GameObject gameController;
     private GameObject balanceBall;
     private GenControl genControl;
+    public GameObject conveyor;
+    private Animator conveyorAnim;
     private Color color_original;
 
-    public float life;
-    public float lifeDamageHit;
     public float positiveBoostToBallPosition;
     public float negativeBoostToBallPosition;
     public float timeDelay;
@@ -25,12 +25,16 @@ public class BehaviourHold : MonoBehaviour
     private KeyCode inputSelected;
     private int safetyNet;
 
+
+
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         gameController = GameObject.Find("GameController");
         balanceBall = GameObject.Find("BalanceBall");
         genControl = gameController.GetComponent<GenControl>();
+        conveyor = GameObject.Find("conveyor");
+        conveyorAnim = conveyor.GetComponent<Animator>();
     }
 
     void Start()
@@ -71,17 +75,33 @@ public class BehaviourHold : MonoBehaviour
 
         void Update()
     {
+        if (Input.GetKeyDown(inputSelected))
+        {
+            //Play SFX
+            GetComponent<AudioSource>().Play();
+        }
+
 
         if (Input.GetKey(inputSelected))
         {
             //Change colour to green when the key is pressed
             GetComponent<SpriteRenderer>().color = Color.green;
 
+
+
             onWait = true;
 
             //Give an extra positive boost to the balance ball position, to increase game feel and give more room to the player
             if (balanceBall != null)
+            {
                 balanceBall.transform.position = new Vector2(balanceBall.transform.position.x + positiveBoostToBallPosition * Time.deltaTime, balanceBall.transform.position.y);
+
+                if (balanceBall.GetComponent<ScoreBallMovement>().onNegativeBoost == false)
+                {
+                    conveyorAnim.Play("conveyor_reverse");
+                }
+            }
+
         }
 
         //Decrease score if left unpressed 2 secs after creating object

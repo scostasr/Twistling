@@ -14,6 +14,7 @@ public class GenControl : MonoBehaviour
     public readonly List<KeyCode> inputList = new List<KeyCode>();
     public bool gameIsPaused = false;
     public GameObject pauseMenu;
+    public GameObject buttonRestart;
 
     private void Awake()
     {
@@ -22,10 +23,6 @@ public class GenControl : MonoBehaviour
 
     void Update()
     {
-        //Restart game when press R
-        if (Input.GetKeyDown(KeyCode.R))
-            SceneManager.LoadScene(1);
-
 
         //Game win and gameover conditions      
         if (isGameOver == true)
@@ -45,11 +42,12 @@ public class GenControl : MonoBehaviour
             {
                 PauseGame();
             }
+        }
 
-            else
-            {
-                ResumeGame();
-            }
+        if (gameIsPaused == true && Input.GetKeyDown(KeyCode.Return))
+        {
+            //buttonRestart.GetComponent<Image>().color = Color.green;
+            ResumeGame();
         }
 
     }

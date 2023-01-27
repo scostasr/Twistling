@@ -8,6 +8,7 @@ public class BehaviourPress : MonoBehaviour
     private GameObject     gameController;
     private GameObject     balanceBall;
     private GenControl     genControl;
+    public GameObject conveyor;
     private Color          color_original;
 
     public float    life;
@@ -21,17 +22,21 @@ public class BehaviourPress : MonoBehaviour
 
     public bool     onKeyPressed  = false;
     public bool     canTakeDamage = false;
+    public bool IamDead = false;
 
     public Vector2  targetPosition;
 
     private KeyCode inputSelected;
     private int     safetyNet;
 
+
+
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         gameController = GameObject.Find("GameController");
         balanceBall    = GameObject.Find("BalanceBall");
+        conveyor = GameObject.Find("conveyor");
         genControl     = gameController.GetComponent<GenControl>();
     }
 
@@ -51,7 +56,7 @@ public class BehaviourPress : MonoBehaviour
             inputSelected = genControl.inputList[randomNum];
             safetyNet++;
 
-            if (safetyNet >= 20)
+            if (safetyNet >= 50)
             {
                 Debug.Log("No key found");
                 break;
@@ -83,6 +88,9 @@ public class BehaviourPress : MonoBehaviour
             //Change sprite color when button is pressed
             spriteRenderer.color = Color.green;
 
+            //Play SFX
+            GetComponent<AudioSource>().Play();
+
         }
 
         if (Input.GetKeyUp(inputSelected))
@@ -92,38 +100,21 @@ public class BehaviourPress : MonoBehaviour
         }
 
         //Decrease score if left unpressed for longer than 2 secs after creating the object
-        if (canTakeDamage == true && balanceBall != null)
+        if (canTakeDamage == true & balanceBall != null)
         {
-            balanceBall.transform.position = new Vector2(balanceBall.transform.position.x - negativeBoostToBallPosition * Time.deltaTime, balanceBall.transform.position.y);
+            if (balanceBall.GetComponent<ScoreBallMovement>().flying == false)
+            {
+                balanceBall.GetComponent<ScoreBallMovement>().onNegativeBoost = true;
+                balanceBall.transform.position = new Vector2(balanceBall.transform.position.x - negativeBoostToBallPosition * Time.deltaTime, balanceBall.transform.position.y);
+                conveyor.GetComponent<Animator>().enabled = true;
+                conveyor.GetComponent<Animator>().Play("conveyor");
+            }
         }
 
 
         //Destroy object if life < 0
         if (life <= 0)
         {
-
-            //Give an extra positive boost to the balance ball position, to increase game feel and give more room to the player
-            if (balanceBall != null)
-            {
-                duration = positiveBoostDuration;
-                targetPosition = new Vector2(balanceBall.transform.position.x + positiveBoostToBall, balanceBall.transform.position.y);
-                safetyNet = 0;
-
-                while (duration > 0)
-                {
-                    balanceBall.transform.position = Vector2.MoveTowards(balanceBall.transform.position, targetPosition, speedPositiveBoost * Time.deltaTime);
-                    duration -= Time.deltaTime;
-
-                    safetyNet++;
-                    if (safetyNet >= 200)
-                    {
-                        Debug.Log("error scoreBall");
-                        break;
-                    }
-                }
-
-            }
-
             //++ to blocksDestroyed variable, -- to blocksOnScreen variable
             genControl.blocksDestroyed++;
             genControl.blocksOnScreen--;
@@ -131,7 +122,14 @@ public class BehaviourPress : MonoBehaviour
             //Eliminate the key code used from the list on GameController
             genControl.keysUsed.Remove(inputSelected);
 
-            Destroy(gameObject);
+            //Give an extra positive boost to the balance ball position, to increase game feel and give more room to the player
+            if (balanceBall != null)
+            {
+                balanceBall.GetComponent<ScoreBallMovement>().PositiveBoost();
+                Destroy(transform.parent.gameObject);
+                Destroy(gameObject);
+            }
+
         }
     }
 
